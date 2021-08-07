@@ -1,10 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
 const knex = require('../knex/knex');
 
-class log{
-    constructor(text) {
+class Log{
+    constructor(text,uuid_category_fk) {
         this.uuid = uuidv4();
         this.text = text;
+        this.uuid_category_fk= uuid_category_fk;
     }
     static getAllLogs() {
         return knex('logs').select('*');
@@ -12,23 +13,26 @@ class log{
 
     saveLog() {
         return knex('logs').insert({
-            uuid_log: this.uuid_log,
-            text: this.text
+            uuid_log: this.uuid,
+            text: this.text,
+            uuid_category_fk: this.uuid_category_fk
+
         }).returning('uuid_log');
     }
 
-    static deleteLog(uuid) {
+    static deleteLog(uuid_log) {
         return knex('logs')
             .del()
-            .where('uuid_log', '=', uuid);
+            .where('uuid_log', '=', uuid_log);
     }
 
-    static updateLog(uuid, text) {
+    static updateLog(uuid_log, text, uuid_category_fk) {
         return knex('logs')
             .update({
                 text: text,
-            }).where('uuid_log', '=', uuid)
+                uuid_category_fk:uuid_category_fk
+            }).where('uuid_log', '=', uuid_log)
             .returning('*');
     }
 }
-module.exports=log;
+module.exports=Log;

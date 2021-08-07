@@ -13,8 +13,8 @@ router.put('/categories/:uuid', category.updateCategory);
 //Router for logs
 router.get('/logs', log.getLogs);
 router.post('/logs', log.saveLog);
-router.delete('/logs/:uuid', log.deleteLoge);
-router.put('/log/:uuid',log.deleteLog);
+router.delete('/logs/:uuid', log.deleteLog);
+router.put('/logs/:uuid', log.updateLog);
 
 
 

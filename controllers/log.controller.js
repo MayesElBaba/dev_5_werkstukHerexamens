@@ -7,13 +7,13 @@ exports.getLogs = async(req, res) => {
 }
 
 exports.saveLog = async(req, res) => {
-    let { text } = req.body;
-    let log = new Log(text);
+    let { text,uuid_category_fk } = req.body;
+    let log = new Log(text, uuid_category_fk);
     await log.saveLog();
     res.status(201).send({
         message: "Log saved !",
         status: 201,
-        uuid_log: uuid_log
+        uuid_log:log.uuid
     })
 }
 
@@ -29,8 +29,8 @@ exports.deleteLog = async(req, res) => {
 
 exports.updateLog = async(req, res) => {
     let { uuid } = req.params;
-    let { text } = req.body;
-    let log = await Log.updateLog(uuid, text);
+    let { text,uuid_category_fk } = req.body;
+    let log = await Log.updateLog(uuid, text, uuid_category_fk);
     res.status(200).send({
         message: "Log updated !",
         status: 200,
