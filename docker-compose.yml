@@ -1,0 +1,17 @@
+
+version: "3.9"
+   
+services:
+  server : 
+    build: './api'
+    ports: 
+     - '5000:5000'
+  ## het verwijdert de image en laat het database 
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: 'dev_5_werkstuk'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'mayes'
+
+  

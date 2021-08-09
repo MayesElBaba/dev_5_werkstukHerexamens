@@ -1,0 +1,4 @@
+#### alle niet nodige filles wegdoen
+node_modules
+npm-debug.log
+Dockerfile
