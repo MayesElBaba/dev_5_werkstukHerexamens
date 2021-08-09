@@ -88,7 +88,4 @@ describe('Manage category', () => {
                 return done();
             });
     });
-
-
-
 });

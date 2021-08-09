@@ -1,39 +1,69 @@
-
-const Log= require("../models/log.model")
+const Log = require("../models/log.model")
 
 exports.getLogs = async(req, res) => {
-    let logs = await Log.getAllLogs();
-    res.status(200).send({ logs });
+    try {
+        let logs = await Log.getAllLogs();
+        res.status(200).send({ logs });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+
 }
 
 exports.saveLog = async(req, res) => {
-    let { text,uuid_category_fk } = req.body;
+
+    let { text, uuid_category_fk } = req.body;
+    if (!text || !uuid_category_fk) {
+        return res.status(400).send({
+            message: "Bad request",
+            status: 400
+        });
+    }
     let log = new Log(text, uuid_category_fk);
-    await log.saveLog();
-    res.status(201).send({
-        message: "Log saved !",
-        status: 201,
-        uuid_log:log.uuid
-    })
+    try {
+        await log.saveLog();
+        res.status(201).send({
+            message: "Log saved !",
+            status: 201,
+            uuid_log: log.uuid
+        })
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
 }
 
 exports.deleteLog = async(req, res) => {
     let { uuid } = req.params;
-    await Log.deleteLog(uuid);
-    res.status(200).send({
-        message: "Log deleted !",
-        status: 200,
-        uuid
-    });
+    try {
+        await Log.deleteLog(uuid);
+        res.status(200).send({
+            message: "Log deleted !",
+            status: 200,
+            uuid
+        });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+
 }
 
 exports.updateLog = async(req, res) => {
     let { uuid } = req.params;
-    let { text,uuid_category_fk } = req.body;
-    let log = await Log.updateLog(uuid, text, uuid_category_fk);
-    res.status(200).send({
-        message: "Log updated !",
-        status: 200,
-        log
-    })
+    let { text, uuid_category_fk } = req.body;
+    if (!text || !uuid_category_fk) {
+        return res.status(400).send({
+            message: "Bad request",
+            status: 400
+        });
+    }
+    try {
+        let log = await Log.updateLog(uuid, text, uuid_category_fk);
+        res.status(200).send({
+            message: "Log updated !",
+            status: 200,
+            log
+        })
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
 }
