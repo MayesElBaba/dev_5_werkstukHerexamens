@@ -16,6 +16,7 @@ router.post('/logs', log.saveLog);
 router.delete('/logs/:uuid', log.deleteLog);
 router.put('/logs/:uuid', log.updateLog);
 
-
+//Redirect to categories
+router.use((req, res) => res.redirect('/categories'));
 
 module.exports = router;

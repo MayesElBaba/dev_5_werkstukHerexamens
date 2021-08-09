@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const knex = require('../knex/knex');
 
 class Log{
-    constructor(text,uuid_category_fk) {
+    constructor(text, uuid_category_fk) {
         this.uuid = uuidv4();
         this.text = text;
         this.uuid_category_fk= uuid_category_fk;
@@ -16,7 +16,6 @@ class Log{
             uuid_log: this.uuid,
             text: this.text,
             uuid_category_fk: this.uuid_category_fk
-
         }).returning('uuid_log');
     }
 
