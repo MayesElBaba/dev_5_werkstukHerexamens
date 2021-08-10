@@ -6,12 +6,14 @@ const log= require('../controllers/log.controller')
 
 //Router for categories
 router.get('/categories', category.getCategories);
+router.get('/categories/:uuid', category.getCategory);
 router.post('/categories', category.saveCategory);
 router.delete('/categories/:uuid', category.deleteCategory);
 router.put('/categories/:uuid', category.updateCategory);
 
 //Router for logs
 router.get('/logs', log.getLogs);
+router.get('/logs/:uuid', log.getLog);
 router.post('/logs', log.saveLog);
 router.delete('/logs/:uuid', log.deleteLog);
 router.put('/logs/:uuid', log.updateLog);

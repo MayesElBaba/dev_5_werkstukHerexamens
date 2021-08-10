@@ -7,6 +7,11 @@ class Category {
         this.name = name;
     }
 
+    static getCategory(uuid){
+        /*hierdoor kan hij de eerste category kiezen en selecteren */
+       return knex('categories').select().where('uuid_category', '=', uuid).first();
+
+    }
 
     static getAllCategories() {
         return knex('categories').select('*');

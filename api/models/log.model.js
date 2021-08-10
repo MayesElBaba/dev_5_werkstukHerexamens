@@ -11,6 +11,12 @@ class Log{
         return knex('logs').select('*');
     }
 
+    static getLog(uuid){
+        /*hierdoor kan hij de eerste log kiezen en selecteren */
+       return knex('logs').select().where('uuid_log', '=', uuid).first();
+
+    }
+
     saveLog() {
         return knex('logs').insert({
             uuid_log: this.uuid,

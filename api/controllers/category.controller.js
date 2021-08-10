@@ -12,6 +12,16 @@ exports.getCategories = async(req, res) => {
     }
 }
 
+exports.getCategory = async(req, res) => {
+    let { uuid } = req.params;
+    try {
+        let category = await Category.getCategory(uuid);
+        res.status(200).send({ category })
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
 /* om een categorie op te slaan*/
 exports.saveCategory = async(req, res) => {
     let { name } = req.body;

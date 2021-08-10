@@ -2,9 +2,20 @@ const Log = require("../models/log.model")
 
 /* om alle logs te tonen*/
 exports.getLogs = async(req, res) => {
+    
     try {
         let logs = await Log.getAllLogs();
         res.status(200).send({ logs });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+
+}
+exports.getLog= async(req, res) => {
+    let { uuid } = req.params;
+    try {
+        let log = await Log.getLog(uuid);
+        res.status(200).send({ log });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
