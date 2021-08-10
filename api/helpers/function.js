@@ -1,3 +1,4 @@
+/* functie om de eerste letter van elke categorie te veranderen naar groot letter */
 exports.capitalLetter = function(word) {
     if (!word || (typeof word === 'number')) {
         return null;

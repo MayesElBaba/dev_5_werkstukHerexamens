@@ -1,17 +1,18 @@
 const { capitalLetter } = require("../helpers/function");
 const Category = require("../models/category.model");
 
-
+/* om alle categorieen te tonen*/
 exports.getCategories = async(req, res) => {
     try {
         let categories = await Category.getAllCategories();
+        /* om de laatste toegevoede categorie als eerste te zien*/
         res.status(200).send({ categories: categories.reverse() })
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
 }
 
-
+/* om een categorie op te slaan*/
 exports.saveCategory = async(req, res) => {
     let { name } = req.body;
     if (!name) {
@@ -33,7 +34,7 @@ exports.saveCategory = async(req, res) => {
     }
 
 }
-
+/* om een categorie te verwijderen*/
 exports.deleteCategory = async(req, res) => {
     let { uuid } = req.params;
     try {
@@ -48,6 +49,7 @@ exports.deleteCategory = async(req, res) => {
     }
 }
 
+/* om eem categorie up te daten*/
 exports.updateCategory = async(req, res) => {
     let { uuid } = req.params;
     let { name } = req.body;

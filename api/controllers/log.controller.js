@@ -1,5 +1,6 @@
 const Log = require("../models/log.model")
 
+/* om alle logs te tonen*/
 exports.getLogs = async(req, res) => {
     try {
         let logs = await Log.getAllLogs();
@@ -10,6 +11,7 @@ exports.getLogs = async(req, res) => {
 
 }
 
+/* om een log toe te voegen */
 exports.saveLog = async(req, res) => {
 
     let { text, uuid_category_fk } = req.body;
@@ -32,6 +34,7 @@ exports.saveLog = async(req, res) => {
     }
 }
 
+/* om een log toe te verwijderen */
 exports.deleteLog = async(req, res) => {
     let { uuid } = req.params;
     try {
@@ -47,6 +50,7 @@ exports.deleteLog = async(req, res) => {
 
 }
 
+/* om een log up te daten */
 exports.updateLog = async(req, res) => {
     let { uuid } = req.params;
     let { text, uuid_category_fk } = req.body;
