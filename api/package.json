@@ -20,5 +20,11 @@
     "devDependencies": {
         "jest": "^27.0.6",
         "supertest": "^6.1.4"
-    }
+    },
+      "jest": {
+    "testPathIgnorePatterns": [
+      "/api/__test__/integration/",
+      "/node_modules/"
+    ]
+  }
 }
