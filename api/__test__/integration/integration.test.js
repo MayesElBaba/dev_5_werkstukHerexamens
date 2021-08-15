@@ -1,7 +1,9 @@
 const request = require('supertest');
 const app = require('../../app');
 
+/* integration test : Test de samenwerking tussen componenten */
 
+/* Testen om een categorie op te slaan in de request body en succes status tonen */
 let catUUID;
 describe('Manage category', () => {
     it('Add a category with POST request', (done) => {
@@ -19,6 +21,9 @@ describe('Manage category', () => {
             });
     });
 
+    /* Testen om 4 logs toe te voegen en te linken aan het zelfde categorie 
+    ! 201 status: status die wordt gecreieerd door de gebruiker*/
+
     it('Add 4 logs to link at the same category', (done) => {
         for (let i = 0; i < 4; i++) {
             request(app)
@@ -35,6 +40,8 @@ describe('Manage category', () => {
         }
     })
 
+     /* Testen als de gelinkde logs gelijk zijn aan 4 en gefilterd */
+
     it('Check if all logs linked is equals to 4', (done) => {
         request(app)
             .get('/logs')
@@ -49,6 +56,8 @@ describe('Manage category', () => {
             });
     });
 
+    /* categories tonen tenminste 1 categorie*/ 
+
     it('Get categories with GET request', (done) => {
         request(app)
             .get('/categories')
@@ -62,6 +71,7 @@ describe('Manage category', () => {
             });
     });
 
+    /* categorie verwijderen*/
     it('Delete a category with DELETE request', (done) => {
         request(app)
             .delete(`/categories/${catUUID}`)
@@ -74,6 +84,10 @@ describe('Manage category', () => {
                 return done();
             });
     });
+
+    /* testen dat alle gelinkde logs aan een bepaalde categorie verwijdert worden
+    je filtert de toegevoegde logs aan de hand van de categorie
+    */
 
     it('Check if all logs linked have been deleted', (done) => {
         request(app)

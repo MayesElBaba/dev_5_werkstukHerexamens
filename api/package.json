@@ -5,7 +5,7 @@
     "main": "./server.js",
     "scripts": {
         "start": "nodemon ./server.js",
-        "test": "jest --detectOpenHandles"
+        "test": "jest --maxWorkers=1 --coverage --detectOpenHandles"
     },
     "author": "",
     "license": "ISC",

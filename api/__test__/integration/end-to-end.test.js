@@ -1,9 +1,12 @@
 const request = require('supertest');
 const app = require('../../app');
 
-
+/* end to end test : 
+Test de volledige applicatie op bijvoorbeeld sporen die overblijven en maakt en volledige run  inclusief database
+*/
 describe('Manage category', () => {
-
+    
+/* categories toevoegen met alle eigenschappen*/ 
     it('Add a category with POST request', (done) => {
         request(app)
             .post('/categories')
@@ -18,6 +21,8 @@ describe('Manage category', () => {
                 return done();
             });
     });
+
+     /* categories tonen met alle eigenschappen*/ 
 
     it('Get categories with GET request', (done) => {
         request(app)
